@@ -53,7 +53,7 @@ namespace SpaceFighter
         public Vector3 Velocity { get; private set; } = Vector3.zero;
         public float SecondsSinceFired { get; private set; } = 0f;
         public bool IsFired { get; private set; } = false;
-        public int Damage = 5;
+        public int Damage = 15;
 
         private void Update()
         {
