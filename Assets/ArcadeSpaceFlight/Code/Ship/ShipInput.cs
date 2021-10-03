@@ -17,9 +17,6 @@ namespace SpaceFighter
         [Tooltip("When using Keyboard/Joystick input, should roll be added to horizontal stick movement. This is a common trick in traditional space sims to help ships roll into turns and gives a more plane-like feeling of flight.")]
         public bool addRoll = true;
 
-        public Gun[] guns;
-        public Transform GimbalTarget = null;
-
         [Space]
 
         [Range(-1, 1)]
@@ -52,7 +49,6 @@ namespace SpaceFighter
                 SetStickCommandsUsingMouse();
                 UpdateMouseWheelThrottle();
                 UpdateKeyboardThrottle(KeyCode.W, KeyCode.S);
-                AttemptFireCannon();
             }
             else
             {
@@ -64,7 +60,6 @@ namespace SpaceFighter
 
                 strafe = 0.0f;
                 UpdateKeyboardThrottle(KeyCode.R, KeyCode.F);
-                AttemptFireCannon();
             }
         }
 
@@ -108,29 +103,6 @@ namespace SpaceFighter
         {
             throttle += Input.GetAxis("Mouse ScrollWheel");
             throttle = Mathf.Clamp(throttle, 0.0f, 1.0f);
-        }
-
-        ///<summary>
-        ///Will attempt to fire the guns
-        /// </summary>
-        private void AttemptFireCannon()
-        {
-            if (Input.GetMouseButton(0) || Input.GetKey(KeyCode.Space))
-            {
-                foreach (var gun in guns)
-                {
-                    if (GimbalTarget != null)
-                    {
-                        gun.UseGimballedAiming = true;
-                        gun.GimbalTarget = GimbalTarget.position;
-                    }
-                    else
-                    {
-                        gun.UseGimballedAiming = false;
-                    }
-                    gun.FireSingleShot();
-                }
-            }
         }
     }
 }
