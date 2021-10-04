@@ -24,7 +24,7 @@ namespace SpaceFighter
         // by various gameplay mechanics. Returns the player ship if possible, otherwise null.
         public static Ship PlayerShip { get { return playerShip; } }
         private static Ship playerShip;
-        private int CurrentHealth;
+        public int CurrentHealth;
 
         public int MaxHealth = 100;
 
@@ -33,6 +33,7 @@ namespace SpaceFighter
         public bool UsingMouseInput { get { return input.useMouseInput; } }
         public Vector3 Velocity { get { return physics.Rigidbody.velocity; } }
         public float Throttle { get { return input.throttle; } }
+        public int Health { get { return CurrentHealth; } }
 
         private void Awake()
         {
@@ -45,7 +46,7 @@ namespace SpaceFighter
         {
             // Pass the input to the physics to move the ship.
             physics.SetPhysicsInput(new Vector3(input.strafe, 0.0f, input.throttle), new Vector3(input.pitch, input.yaw, input.roll));
-            //gunController.Update();
+
             // If this is the player ship, then set the static reference. If more than one ship
             // is set to player, then whatever happens to be the last ship to be updated will be
             // considered the player. Don't let this happen.
@@ -61,13 +62,14 @@ namespace SpaceFighter
 
         private void OnCollisionEnter(Collision coll)
         {
-            Debug.Log("Ship Collision");
-            Debug.Log(coll.gameObject.name);
-            Debug.Log(coll.relativeVelocity.magnitude);
-            Debug.Log(coll.rigidbody.mass);
-            int damage = (int)Math.Floor(coll.relativeVelocity.magnitude * coll.rigidbody.mass);
-            Debug.Log(damage);
+            int damage = (int)Math.Floor(coll.relativeVelocity.magnitude * (coll.rigidbody.mass * .001));
             CurrentHealth -= damage;
+        }
+
+        // non returning method for applying damage
+        public void ApplyDamage(int adj)
+        {
+            CurrentHealth -= adj;
         }
     }
 }

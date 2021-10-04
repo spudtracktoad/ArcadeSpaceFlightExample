@@ -235,7 +235,8 @@ namespace SpaceFighter
 
         private void HandleImpactDamage(RaycastHit hitInfo)
         {
-            hitInfo.collider.gameObject.SendMessage("ApplyDamage", 5, SendMessageOptions.DontRequireReceiver);
+            hitInfo.collider.gameObject.SendMessageUpwards("ApplyDamage", 5.0);
+            //hitInfo.collider.gameObject.SendMessage("ApplyDamage", 5, SendMessageOptions.DontRequireReceiver);
             // ==========================================================
             // TODO: Bullet hit something, insert damage handling here!
             // ==========================================================

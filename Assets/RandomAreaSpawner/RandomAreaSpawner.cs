@@ -40,10 +40,10 @@ public class RandomAreaSpawner : MonoBehaviour
     [Header("Rigidbody settings:")]
 
     [Tooltip("Apply a velocity from 0 to this value in a random direction.")]
-    public float velocity = 0.0f;
+    public float velocity = 1.0f;
 
     [Tooltip("Apply an angular velocity (deg/s) from 0 to this value in a random direction.")]
-    public float angularVelocity = 0.0f;
+    public float angularVelocity = 1.0f;
 
     [Tooltip("If true, raise the mass of the object based on its scale.")]
     public bool scaleMass = true;
