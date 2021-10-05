@@ -4,6 +4,7 @@
 //
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace SpaceFighter
 {
@@ -57,6 +58,7 @@ namespace SpaceFighter
             if (CurrentHealth < 0)
             {
                 Destroy(gameObject);
+                SceneManager.LoadScene("EndGame");
             }
         }
 
